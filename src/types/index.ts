@@ -23,7 +23,7 @@ export interface RaceResult {
 
 export interface RaceProgress {
   horseId: number;
-  position: number; // 0-100 percentage of distance covered
+  position: number; 
   isFinished: boolean;
 }
 

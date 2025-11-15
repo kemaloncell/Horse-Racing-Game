@@ -1,9 +1,13 @@
 export const RACE_DISTANCES = [1200, 1400, 1600, 1800, 2000, 2200] as const;
-
 export const TOTAL_HORSES = 20;
 export const HORSES_PER_RACE = 10;
 export const TOTAL_ROUNDS = 6;
-
+export const HORSE_NAMES = [
+  'Thunder', 'Lightning', 'Storm', 'Blaze', 'Shadow',
+  'Spirit', 'Duke', 'Ace', 'Champion', 'Victory',
+  'Apollo', 'Zeus', 'Athena', 'Hercules', 'Phoenix',
+  'Midnight', 'Comet', 'Star', 'Flash', 'Rocket'
+] as const;
 export const HORSE_COLORS = [
   '#FF6B6B', // Red
   '#4ECDC4', // Turquoise
@@ -26,6 +30,6 @@ export const HORSE_COLORS = [
   '#52BE80', // Green
   '#AF7AC5', // Violet
 ] as const;
-
 export const MIN_CONDITION = 1;
 export const MAX_CONDITION = 100;
+export const ANIMATION_SPEED_FACTOR = 5;
