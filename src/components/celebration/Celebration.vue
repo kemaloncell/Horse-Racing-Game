@@ -8,7 +8,7 @@
 
         <div class="winner-card">
           <div class="confetti">
-            <span v-for="i in 50" :key="i" class="confetti-piece">{{ getConfettiEmoji() }}</span>
+            <span v-for="(emoji, i) in confettiEmojis" :key="i" class="confetti-piece">{{ emoji }}</span>
           </div>
 
           <h1 class="celebration-title">{{ isFinal ? '🏆 CHAMPION! 🏆' : '🎉 ROUND WINNER! 🎉' }}</h1>
@@ -127,6 +127,8 @@ const getConfettiEmoji = () => {
   const emojis = ['🎉', '🎊', '⭐', '✨', '🌟', '💫'];
   return emojis[Math.floor(Math.random() * emojis.length)];
 };
+
+const confettiEmojis = Array.from({ length: 50 }, () => getConfettiEmoji());
 
 const formatTime = (ms: number) => {
   return (ms / 1000).toFixed(2) + 's';
