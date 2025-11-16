@@ -48,9 +48,9 @@
 
 <script setup lang="ts">
 import BaseCard from '@/components/base/BaseCard.vue';
-import Horse from '@/components/Horse.vue';
-import Celebration from '@/components/Celebration.vue';
-import RaceTrackEmptyState from '@/components/RaceTrackEmptyState.vue';
+import Horse from '@/components/track/Horse.vue';
+import Celebration from '@/components/celebration/Celebration.vue';
+import RaceTrackEmptyState from '@/components/track/RaceTrackEmptyState.vue';
 import { useRacing } from '@/composables/useRacing';
 import { useCelebration } from '@/composables/useCelebration';
 

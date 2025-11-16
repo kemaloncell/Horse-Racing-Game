@@ -26,11 +26,11 @@
 
 <script setup lang="ts">
 import BaseCard from '@/components/base/BaseCard.vue';
-import HorseList from '@/components/HorseList.vue';
-import RaceControls from '@/components/RaceControls.vue';
-import RaceTrack from '@/components/RaceTrack.vue';
-import ProgramSchedule from '@/components/ProgramSchedule.vue';
-import RaceResults from '@/components/RaceResults.vue';
+import HorseList from '@/components/panels/HorseList.vue';
+import RaceControls from '@/components/track/RaceControls.vue';
+import RaceTrack from '@/components/track/RaceTrack.vue';
+import ProgramSchedule from '@/components/panels/ProgramSchedule.vue';
+import RaceResults from '@/components/panels/RaceResults.vue';
 </script>
 
 <style scoped lang="scss">
