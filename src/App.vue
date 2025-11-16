@@ -24,10 +24,11 @@
 
 <script setup lang="ts">
 import HorseList from '@/components/HorseList.vue';
-import RaceTrack from '@/components/RaceTrack.vue';
 import RaceControls from '@/components/RaceControls.vue';
+/*import RaceTrack from '@/components/RaceTrack.vue';
+
 import ProgramSchedule from '@/components/ProgramSchedule.vue';
-import RaceResults from '@/components/RaceResults.vue';
+import RaceResults from '@/components/RaceResults.vue'; */
 </script>
 
 <style scoped lang="scss">
