@@ -35,7 +35,13 @@
                 <img src="@/assets/images/horse.png" alt="Horse" class="horse-image" />
               </div>
               <h3 class="podium-name">{{ topThree[1].name }}</h3>
-              <div class="podium-place">2nd</div>
+              <BaseBadge
+                variant="custom"
+                size="md"
+                :custom-style="{ background: 'rgba(255, 255, 255, 0.8)' }"
+              >
+                2nd
+              </BaseBadge>
             </div>
 
             <div class="podium-position first">
@@ -47,7 +53,13 @@
                 <img src="@/assets/images/horse.png" alt="Horse" class="horse-image" />
               </div>
               <h3 class="podium-name">{{ topThree[0].name }}</h3>
-              <div class="podium-place">1st</div>
+              <BaseBadge
+                variant="custom"
+                size="md"
+                :custom-style="{ background: 'rgba(255, 255, 255, 0.8)' }"
+              >
+                1st
+              </BaseBadge>
             </div>
 
             <div class="podium-position third">
@@ -59,7 +71,13 @@
                 <img src="@/assets/images/horse.png" alt="Horse" class="horse-image" />
               </div>
               <h3 class="podium-name">{{ topThree[2].name }}</h3>
-              <div class="podium-place">3rd</div>
+              <BaseBadge
+                variant="custom"
+                size="md"
+                :custom-style="{ background: 'rgba(255, 255, 255, 0.8)' }"
+              >
+                3rd
+              </BaseBadge>
             </div>
           </div>
 
@@ -86,6 +104,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseBadge from '@/components/base/BaseBadge.vue';
 import type { Horse } from '@/types';
 import { getColorCode } from '@/utils/constants';
 
@@ -257,15 +276,6 @@ const formatTime = (ms: number) => {
 
 .podium-position.first .podium-name {
   font-size: 1.5rem;
-}
-
-.podium-place {
-  font-size: 0.875rem;
-  font-weight: 600;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  background: rgba(255, 255, 255, 0.8);
-  color: $color-text;
 }
 
 .winner-stats {

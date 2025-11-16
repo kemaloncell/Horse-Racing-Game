@@ -7,8 +7,8 @@ export function useCelebration() {
 
   const celebration = computed(() => store.getters['racing/celebrationData']);
 
-  const closeCelebration = () => {
-    store.dispatch('racing/hideCelebration');
+  const closeCelebration = async () => {
+    await store.dispatch('racing/hideCelebration');
   };
 
   const waitForCelebrationClose = (): Promise<void> => {

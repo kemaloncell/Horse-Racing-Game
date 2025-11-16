@@ -2,10 +2,12 @@
   <div class="race-track">
     <RaceTrackEmptyState v-if="!currentRoundData" />
     <div v-else class="track-container">
-      <div class="race-info">
-        <span class="round-label">Round {{ currentRoundData.roundNumber }}</span>
-        <span class="distance-label">{{ currentRoundData.distance }}m</span>
-      </div>
+      <BaseCard class="race-info-card">
+        <div class="race-info">
+          <span class="round-label">Round {{ currentRoundData.roundNumber }}</span>
+          <span class="distance-label">{{ currentRoundData.distance }}m</span>
+        </div>
+      </BaseCard>
 
       <div class="lanes">
         <div
@@ -45,6 +47,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseCard from '@/components/base/BaseCard.vue';
 import Horse from '@/components/Horse.vue';
 import Celebration from '@/components/Celebration.vue';
 import RaceTrackEmptyState from '@/components/RaceTrackEmptyState.vue';
@@ -71,14 +74,15 @@ const { celebration, closeCelebration } = useCelebration();
   padding: $spacing-lg;
 }
 
+.race-info-card {
+  margin-bottom: $spacing-md;
+}
+
 .race-info {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   padding: $spacing-md;
-  background-color: rgba(255, 255, 255, 0.9);
-  border-radius: $border-radius;
-  margin-bottom: $spacing-md;
   font-weight: 700;
 }
 
@@ -122,7 +126,7 @@ const { celebration, closeCelebration } = useCelebration();
   position: absolute;
   right: 0;
   top: 5.6rem;
-  bottom: 1.7rem;
+  bottom: 1.3rem;
   width: 1.6rem;
   background: repeating-linear-gradient(
     45deg,

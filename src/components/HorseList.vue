@@ -1,10 +1,10 @@
 <template>
   <div class="horse-list">
-    <div class="panel-header">
+    <BasePanelHeader variant="horse-list">
       Horse List (1-{{ horses.length }})
-    </div>
+    </BasePanelHeader>
     <div class="table-container">
-      <table>
+      <BaseTable>
         <thead>
           <tr>
             <th>Name</th>
@@ -27,13 +27,15 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </BaseTable>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import BaseBadge from '@/components/base/BaseBadge.vue';
+import BasePanelHeader from '@/components/base/BasePanelHeader.vue';
+import BaseTable from '@/components/base/BaseTable.vue';
 import { useRaceProgram } from '@/composables/useRaceProgram';
 import { getColorCode } from '@/utils/constants';
 
@@ -47,31 +49,9 @@ const { horses } = useRaceProgram();
   height: 100%;
 }
 
-.panel-header {
-  background-color: $color-horse-list-bg;
-  padding: $spacing-sm;
-  font-weight: 700;
-  border-bottom: 2px solid $color-border;
-}
-
 .table-container {
   flex: 1;
   overflow-y: auto;
   padding: $spacing-sm;
-}
-
-table {
-  width: 100%;
-  font-size: 0.8125rem;
-
-  th {
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03125rem;
-  }
-
-  td {
-    font-size: 0.8125rem;
-  }
 }
 </style>

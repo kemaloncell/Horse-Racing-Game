@@ -1,13 +1,21 @@
 <template>
   <div class="horse-wrapper" :style="{ left: `${progress}%` }" :class="{ 'is-running': progress > 0 && progress < 100 }">
-    <div class="horse-icon" :style="{ backgroundColor: getColorCode(horse.color) }">
+    <div class="horse-icon">
       <img src="@/assets/images/horse.png" alt="Horse" class="horse-image" />
     </div>
-    <div class="horse-name">{{ horse.name }}</div>
+    <BaseBadge
+      variant="custom"
+      size="sm"
+      :custom-style="{ backgroundColor: getColorCode(horse.color) }"
+      :title="horse.color"
+    >
+      {{ horse.name }}
+    </BaseBadge>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseBadge from '@/components/base/BaseBadge.vue';
 import type { Horse } from '@/types';
 import { getColorCode } from '@/utils/constants';
 
@@ -39,12 +47,9 @@ defineProps<Props>();
 .horse-icon {
   width: 2.5rem;
   height: 2.5rem;
-  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid $color-border;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.2);
   overflow: hidden;
   position: relative;
 }
@@ -56,15 +61,6 @@ defineProps<Props>();
   filter: brightness(1.1) contrast(1.1);
   position: relative;
   z-index: 1;
-}
-
-.horse-name {
-  font-size: 0.625rem;
-  font-weight: 600;
-  white-space: nowrap;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 0.125rem 0.375rem;
-  border-radius: 0.1875rem;
 }
 
 // Gallop animation - simulates horse running

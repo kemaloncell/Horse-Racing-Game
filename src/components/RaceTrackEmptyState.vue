@@ -5,22 +5,32 @@
       <h2>Ready to Race!</h2>
       <p class="hint">Generate a program and click START to begin the championship</p>
       <div class="stats">
-        <div class="stat-item">
-          <span class="stat-number">20</span>
-          <span class="stat-label">Horses</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">6</span>
-          <span class="stat-label">Rounds</span>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number">10</span>
-          <span class="stat-label">Per Race</span>
-        </div>
+        <BaseCard>
+          <div class="stat-item">
+            <span class="stat-number">20</span>
+            <span class="stat-label">Horses</span>
+          </div>
+        </BaseCard>
+        <BaseCard>
+          <div class="stat-item">
+            <span class="stat-number">6</span>
+            <span class="stat-label">Rounds</span>
+          </div>
+        </BaseCard>
+        <BaseCard>
+          <div class="stat-item">
+            <span class="stat-number">10</span>
+            <span class="stat-label">Per Race</span>
+          </div>
+        </BaseCard>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import BaseCard from '@/components/base/BaseCard.vue';
+</script>
 
 <style scoped lang="scss">
 .empty-state {
@@ -64,14 +74,10 @@
 }
 
 .stat-item {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   padding: $spacing-md;
   background: rgba(255, 255, 255, 0.8);
-  border-radius: $border-radius;
   min-width: 5rem;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .stat-number {
