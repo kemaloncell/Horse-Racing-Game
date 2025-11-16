@@ -1,23 +1,24 @@
 <template>
   <div class="race-controls">
-    <button
+    <BaseButton
+      variant="secondary"
       @click="handleGenerateProgram"
       :disabled="isRacing"
-      class="btn-generate"
     >
       GENERATE PROGRAM
-    </button>
-    <button
+    </BaseButton>
+    <BaseButton
+      variant="primary"
       @click="handleStartRace"
       :disabled="!canStartRace"
-      class="btn-start"
     >
       {{ isRacing ? 'RACING...' : 'START / PAUSE' }}
-    </button>
+    </BaseButton>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseButton from '@/components/base/BaseButton.vue';
 import { useRacing } from '@/composables/useRacing';
 import { useRaceProgram } from '@/composables/useRaceProgram';
 
@@ -32,12 +33,5 @@ const handleStartRace = async () => await startRace();
 .race-controls {
   display: flex;
   gap: $spacing-md;
-}
-
-.btn-generate,
-.btn-start {
-  background-color: $color-white;
-  color: $color-text;
-  border: 2px solid $color-text;
 }
 </style>

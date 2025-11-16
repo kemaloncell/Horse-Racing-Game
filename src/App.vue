@@ -6,23 +6,24 @@
     </header>
 
     <main class="main-content">
-      <div class="left-panel">
+      <BaseCard>
         <HorseList />
-      </div>
+      </BaseCard>
 
-      <div class="center-panel">
+      <BaseCard>
         <RaceTrack />
-      </div>
+      </BaseCard>
 
-      <div class="right-panel">
+      <BaseCard with-gap>
         <ProgramSchedule />
         <RaceResults />
-      </div>
+      </BaseCard>
     </main>
   </div>
 </template>
 
 <script setup lang="ts">
+import BaseCard from '@/components/base/BaseCard.vue';
 import HorseList from '@/components/HorseList.vue';
 import RaceControls from '@/components/RaceControls.vue';
 import RaceTrack from '@/components/RaceTrack.vue';
@@ -60,20 +61,5 @@ import RaceResults from '@/components/RaceResults.vue'; */
   gap: $spacing-md;
   padding: $spacing-md;
   overflow: hidden;
-}
-
-.left-panel,
-.center-panel,
-.right-panel {
-  background-color: $color-white;
-  border-radius: $border-radius;
-  box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.right-panel {
-  gap: $spacing-md;
 }
 </style>

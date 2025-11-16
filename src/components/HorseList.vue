@@ -17,13 +17,13 @@
             <td>{{ horse.name }}</td>
             <td>{{ horse.condition }}</td>
             <td>
-              <span
-                class="color-badge"
-                :style="{ backgroundColor: getColorCode(horse.color) }"
+              <BaseBadge
+                variant="custom"
+                :custom-style="{ backgroundColor: getColorCode(horse.color) }"
                 :title="horse.color"
               >
                 {{ horse.color }}
-              </span>
+              </BaseBadge>
             </td>
           </tr>
         </tbody>
@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import BaseBadge from '@/components/base/BaseBadge.vue';
 import { useRaceProgram } from '@/composables/useRaceProgram';
 import { getColorCode } from '@/utils/constants';
 
@@ -72,18 +73,5 @@ table {
   td {
     font-size: 0.8125rem;
   }
-}
-
-.color-badge {
-  display: inline-block;
-  padding: 0.25rem 0.5rem;
-  border-radius: $border-radius;
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: rgba(0, 0, 0, 0.7);
-  max-width: 6.25rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 </style>
