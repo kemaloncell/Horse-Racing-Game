@@ -19,12 +19,10 @@
 
 <script setup lang="ts">
 import { useRacing } from '@/composables/useRacing';
-const {
-  isRacing,
-  canStartRace,
-  generateProgram,
-  startRace,
-} = useRacing();
+import { useRaceProgram } from '@/composables/useRaceProgram';
+
+const { isRacing, canStartRace, startRace } = useRacing();
+const { generateProgram } = useRaceProgram();
 
 const handleGenerateProgram = async () => await generateProgram();
 const handleStartRace = async () => await startRace();

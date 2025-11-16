@@ -33,10 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { useRacing } from '@/composables/useRacing';
+import { useRaceProgram } from '@/composables/useRaceProgram';
 import { getColorCode } from '@/utils/constants';
 
-const { horses } = useRacing();
+const { horses } = useRaceProgram();
 </script>
 
 <style scoped lang="scss">
@@ -66,7 +66,7 @@ table {
   th {
     font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
+    letter-spacing: 0.03125rem;
   }
 
   td {
@@ -76,12 +76,12 @@ table {
 
 .color-badge {
   display: inline-block;
-  padding: 4px 8px;
-  border-radius: 4px;
+  padding: 0.25rem 0.5rem;
+  border-radius: $border-radius;
   font-size: 0.8125rem;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.7);
-  max-width: 100px;
+  max-width: 6.25rem;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;

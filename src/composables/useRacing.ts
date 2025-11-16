@@ -1,14 +1,15 @@
 import { computed } from 'vue';
 import { useStore } from 'vuex';
 import type { RootState } from '@/store';
-import { generateHorses, generateSchedule } from '@/utils/horseGenerator';
 import { simulateRace } from '@/utils/raceSimulator';
-import { TOTAL_HORSES } from '@/utils/constants';
+import { useRaceProgram } from './useRaceProgram';
+import { useCelebration } from './useCelebration';
 
 export function useRacing() {
   const store = useStore<RootState>();
-  const horses = computed(() => store.getters['racing/allHorses']);
-  const schedule = computed(() => store.getters['racing/raceSchedule']);
+  const { schedule } = useRaceProgram();
+  const { waitForCelebrationClose } = useCelebration();
+
   const results = computed(() => store.getters['racing/raceResults']);
   const isRacing = computed(() => store.getters['racing/isRaceInProgress']);
   const currentRound = computed(() => store.getters['racing/currentRoundNumber']);
@@ -18,21 +19,13 @@ export function useRacing() {
     return schedule.value.length > 0 && !isRacing.value;
   });
 
-  const generateProgram = async () => {
-    const newHorses = generateHorses(TOTAL_HORSES);
-    const raceSchedule = generateSchedule(newHorses);
-
-    await store.dispatch('racing/resetAll')
-    await  store.dispatch('racing/setHorses', newHorses);
-    await store.dispatch('racing/generateSchedule', raceSchedule)
-  }
-
   const startRace = async () => {
     const allRounds = schedule.value;
     const completedRounds = results.value.length;
 
     for (let i = completedRounds; i < allRounds.length; i++) {
       const round = allRounds[i]
+      const isFinalRound = i === allRounds.length - 1;
 
       await store.dispatch('racing/startRound', round.roundNumber);
 
@@ -47,26 +40,56 @@ export function useRacing() {
 
       await store.dispatch('racing/finishRound', result);
 
-      // wait 4 ms per race
-      await new Promise(resolve => setTimeout(resolve, 4000))
+      const sortedPositions = result.positions
+          .sort((a, b) => a.position - b.position);
+      const winner = sortedPositions[0];
+
+      if (winner) {
+        if (isFinalRound) {
+
+          const topThree = sortedPositions
+            .slice(0, 3)
+            .map(p => p.horse);
+
+          await store.dispatch('racing/showCelebration', {
+            winner: winner.horse,
+            roundNumber: result.roundNumber,
+            distance: result.distance,
+            time: winner.time,
+            isFinal: true,
+            topThree: topThree.length === 3 ? topThree : null,
+          });
+        } else {
+          await store.dispatch('racing/showCelebration', {
+            winner: winner.horse,
+            roundNumber: result.roundNumber,
+            distance: result.distance,
+            time: winner.time,
+            isFinal: false,
+            topThree: null,
+          });
+        }
+
+        await waitForCelebrationClose();
+      }
+
+      if (!isFinalRound) {
+        await new Promise(resolve => setTimeout(resolve, 750));
+      }
     }
   };
-
 
   const getHorseProgress = (horseId: number): number => {
     return raceProgress.value[horseId]?.position || 0
   };
 
   return {
-    horses,
-    schedule,
     results,
     isRacing,
     currentRound,
     currentRoundData,
     raceProgress,
     canStartRace,
-    generateProgram,
     startRace,
     getHorseProgress,
   };

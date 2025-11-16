@@ -1,6 +1,16 @@
 import type { Module } from 'vuex';
 import type { Horse, Round, RaceResult, RaceProgress } from '@/types';
 
+export interface CelebrationData {
+  show: boolean;
+  winner: Horse | null;
+  roundNumber: number;
+  distance: number;
+  time: number;
+  isFinal: boolean;
+  topThree: Horse[] | null;
+}
+
 export interface RacingState {
   horses: Horse[];
   schedule: Round[];
@@ -8,6 +18,7 @@ export interface RacingState {
   results: RaceResult[];
   isRacing: boolean;
   raceProgress: Record<number, RaceProgress>;
+  celebration: CelebrationData;
 }
 
 const racingModule: Module<RacingState, any> = {
@@ -20,6 +31,15 @@ const racingModule: Module<RacingState, any> = {
     results: [],
     isRacing: false,
     raceProgress: {},
+    celebration: {
+      show: false,
+      winner: null,
+      roundNumber: 0,
+      distance: 0,
+      time: 0,
+      isFinal: false,
+      topThree: null,
+    },
   }),
 
   getters: {
@@ -33,6 +53,7 @@ const racingModule: Module<RacingState, any> = {
       if (state.currentRound === null) return null;
       return state.schedule[state.currentRound - 1] || null;
     },
+    celebrationData: (state) => state.celebration,
   },
 
   mutations: {
@@ -64,6 +85,17 @@ const racingModule: Module<RacingState, any> = {
       state.raceProgress = {};
     },
 
+    SHOW_CELEBRATION(state, data: Omit<CelebrationData, 'show'>) {
+      state.celebration = {
+        ...data,
+        show: true,
+      };
+    },
+
+    HIDE_CELEBRATION(state) {
+      state.celebration.show = false;
+    },
+
     RESET_ALL(state) {
       state.horses = [];
       state.schedule = [];
@@ -71,6 +103,15 @@ const racingModule: Module<RacingState, any> = {
       state.results = [];
       state.isRacing = false;
       state.raceProgress = {};
+      state.celebration = {
+        show: false,
+        winner: null,
+        roundNumber: 0,
+        distance: 0,
+        time: 0,
+        isFinal: false,
+        topThree: null,
+      };
     },
   },
 
@@ -102,6 +143,14 @@ const racingModule: Module<RacingState, any> = {
 
     resetAll({ commit }) {
       commit('RESET_ALL');
+    },
+
+    showCelebration({ commit }, data: Omit<CelebrationData, 'show'>) {
+      commit('SHOW_CELEBRATION', data);
+    },
+
+    hideCelebration({ commit }) {
+      commit('HIDE_CELEBRATION');
     },
   },
 };
