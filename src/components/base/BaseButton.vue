@@ -47,7 +47,7 @@ defineEmits<{
     color: $color-white;
 
     &:not(:disabled):hover {
-      background-color: darken($color-text, 10%);
+      background-color: $color-text-hover;
       transform: translateY(-0.0625rem);
     }
   }
@@ -57,7 +57,7 @@ defineEmits<{
     color: $color-text;
 
     &:not(:disabled):hover {
-      background-color: lighten($color-text, 60%);
+      background-color: $color-bg-hover;
       transform: translateY(-0.0625rem);
     }
   }

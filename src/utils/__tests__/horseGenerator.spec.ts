@@ -1,8 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { generateHorses, generateSchedule } from '../horseGenerator';
-import { TOTAL_HORSES, HORSES_PER_RACE, RACE_DISTANCES } from '../constants';
-
-const TOTAL_ROUNDS = 6;
+import { TOTAL_HORSES, HORSES_PER_RACE, RACE_DISTANCES, TOTAL_ROUNDS } from '../constants';
 
 describe('horseGenerator', () => {
   describe('generateHorses', () => {

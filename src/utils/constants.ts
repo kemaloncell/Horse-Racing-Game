@@ -1,6 +1,8 @@
 export const RACE_DISTANCES = [1200, 1400, 1600, 1800, 2000, 2200] as const;
 export const TOTAL_HORSES = 20;
 export const HORSES_PER_RACE = 10;
+export const TOTAL_ROUNDS = RACE_DISTANCES.length;
+
 export const HORSE_NAMES = [
   'Thunder', 'Lightning', 'Storm', 'Blaze', 'Shadow',
   'Spirit', 'Duke', 'Ace', 'Champion', 'Victory',
@@ -36,8 +38,22 @@ export const getColorCode = (colorName: string): string => {
   return COLOR_CODES[colorName as keyof typeof COLOR_CODES] || '#000000';
 };
 
-// Use faster values in Cypress tests
+export const SPEED_VARIATION_MIN = 0.85;
+export const SPEED_VARIATION_MAX = 1.15;
+export const SPEED_VARIATION_RANGE = SPEED_VARIATION_MAX - SPEED_VARIATION_MIN; // 0.3
+
+export const MAX_PROGRESS_PERCENT = 100;
+export const ANIMATION_FPS = 20;
+export const ANIMATION_INTERVAL = 1000 / ANIMATION_FPS;  // 50ms for 20 FPS
+
 const isTestMode = typeof window !== 'undefined' && (window as any).Cypress;
 export const MIN_CONDITION = isTestMode ? 80 : 1;
 export const MAX_CONDITION = 100;
 export const ANIMATION_SPEED_FACTOR = isTestMode ? 2 : 5;
+
+export const CONFETTI_COUNT = 50;
+export const FIREWORK_COUNT = 6;
+export const TOP_POSITIONS_COUNT = 3;
+export const MS_TO_SECONDS = 1000;
+
+export const DELAY_BETWEEN_ROUNDS_MS = 750;

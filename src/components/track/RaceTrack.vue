@@ -97,7 +97,7 @@ const { celebration, closeCelebration } = useCelebration();
   flex: 1;
   display: flex;
   align-items: center;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: $color-overlay-white-subtle;
   border: 2px dashed $color-border;
   border-radius: $border-radius;
   position: relative;
@@ -111,7 +111,7 @@ const { celebration, closeCelebration } = useCelebration();
   justify-content: center;
   font-weight: 700;
   font-size: 1.125rem;
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: $color-overlay-white-medium;
   height: 100%;
   border-right: 2px solid $color-border;
 }

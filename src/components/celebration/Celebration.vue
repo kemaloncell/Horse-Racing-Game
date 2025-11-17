@@ -3,7 +3,7 @@
     <div v-if="show" class="celebration-overlay" @click="$emit('close')">
       <div class="celebration-content">
         <div class="fireworks">
-          <div class="firework" v-for="i in 6" :key="i"></div>
+          <div class="firework" v-for="i in FIREWORK_COUNT" :key="i"></div>
         </div>
 
         <div class="winner-card">
@@ -106,7 +106,7 @@
 <script setup lang="ts">
 import BaseBadge from '@/components/base/BaseBadge.vue';
 import type { Horse } from '@/types';
-import { getColorCode } from '@/utils/constants';
+import { getColorCode, CONFETTI_COUNT, FIREWORK_COUNT, MS_TO_SECONDS } from '@/utils/constants';
 
 interface Props {
   show: boolean;
@@ -128,10 +128,10 @@ const getConfettiEmoji = () => {
   return emojis[Math.floor(Math.random() * emojis.length)];
 };
 
-const confettiEmojis = Array.from({ length: 50 }, () => getConfettiEmoji());
+const confettiEmojis = Array.from({ length: CONFETTI_COUNT }, () => getConfettiEmoji());
 
 const formatTime = (ms: number) => {
-  return (ms / 1000).toFixed(2) + 's';
+  return (ms / MS_TO_SECONDS).toFixed(2) + 's';
 };
 </script>
 
@@ -142,7 +142,7 @@ const formatTime = (ms: number) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.8);
+  background: $color-overlay-dark;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -160,14 +160,14 @@ const formatTime = (ms: number) => {
 }
 
 .winner-card {
-  background: linear-gradient(135deg, #fff 0%, #f0f0f0 100%);
+  background: linear-gradient(135deg, $color-white 0%, $color-bg-light 100%);
   border-radius: 1rem;
   padding: 3rem 2rem;
   max-width: 32rem;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+  box-shadow: $shadow-xl;
   animation: popIn 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
@@ -176,7 +176,7 @@ const formatTime = (ms: number) => {
   font-weight: 700;
   margin: 0 0 2rem 0;
   animation: pulse 1.5s ease-in-out infinite;
-  background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+  background: linear-gradient(45deg, $color-celebration-1, $color-celebration-2, $color-celebration-3);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -195,7 +195,7 @@ const formatTime = (ms: number) => {
   justify-content: center;
   margin-bottom: 1rem;
   border: 4px solid $color-white;
-  box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.2);
+  box-shadow: $shadow-lg;
   animation: rotate 3s linear infinite;
   overflow: hidden;
   position: relative;
@@ -286,7 +286,7 @@ const formatTime = (ms: number) => {
   justify-content: center;
   margin: 2rem 0;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.5);
+  background: $color-overlay-white-light;
   border-radius: 0.5rem;
 }
 
@@ -298,7 +298,7 @@ const formatTime = (ms: number) => {
 
 .stat-label {
   font-size: 0.875rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: $color-overlay-medium;
   text-transform: uppercase;
   letter-spacing: 0.05rem;
 }
@@ -311,7 +311,7 @@ const formatTime = (ms: number) => {
 
 .continue-hint {
   font-size: 0.875rem;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba($color-black, 0.5);
   margin: 1rem 0 0 0;
   animation: blink 2s ease-in-out infinite;
 }
@@ -440,12 +440,12 @@ const formatTime = (ms: number) => {
   0% {
     transform: translate(0, 0);
     opacity: 1;
-    box-shadow: 0 0 0 0 #ff6b6b, 0 0 0 0 #4ecdc4, 0 0 0 0 #45b7d1;
+    box-shadow: 0 0 0 0 $color-celebration-1, 0 0 0 0 $color-celebration-2, 0 0 0 0 $color-celebration-3;
   }
   100% {
     transform: translate(var(--x, 0), var(--y, 0));
     opacity: 0;
-    box-shadow: 0 0 0 3rem #ff6b6b, 0 0 0 3rem #4ecdc4, 0 0 0 3rem #45b7d1;
+    box-shadow: 0 0 0 3rem $color-celebration-1, 0 0 0 3rem $color-celebration-2, 0 0 0 3rem $color-celebration-3;
   }
 }
 

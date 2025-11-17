@@ -4,8 +4,34 @@ $color-track-bg: #90c878;
 $color-program-header: #6ba3d8;
 $color-results-header: #e88585;
 $color-white: #ffffff;
+$color-black: #000000;
 $color-border: #d0d0d0;
 $color-text: #333333;
+$color-text-hover: #222222;
+$color-bg-hover: #f5f5f5;
+$color-gray: #999999;
+$color-bg-light: #f0f0f0;
+
+$color-overlay-dark: rgba($color-black, 0.8);
+$color-overlay-medium: rgba($color-black, 0.6);
+$color-overlay-light: rgba($color-black, 0.05);
+
+$color-overlay-white-heavy: rgba($color-white, 0.9);
+$color-overlay-white-strong: rgba($color-white, 0.8);
+$color-overlay-white-medium: rgba($color-white, 0.7);
+$color-overlay-white-light: rgba($color-white, 0.5);
+$color-overlay-white-subtle: rgba($color-white, 0.3);
+
+$color-overlay-track: rgba($color-track-bg, 0.2);
+
+$shadow-sm: 0 0.125rem 0.25rem rgba($color-black, 0.1);
+$shadow-md: 0 0.125rem 0.5rem rgba($color-black, 0.1);
+$shadow-lg: 0 0.5rem 2rem rgba($color-black, 0.2);
+$shadow-xl: 0 1rem 3rem rgba($color-black, 0.3);
+
+$color-celebration-1: #ff6b6b;
+$color-celebration-2: #4ecdc4;
+$color-celebration-3: #45b7d1;
 
 $spacing-sm: 0.5rem;   // 8px
 $spacing-md: 1rem;     // 16px

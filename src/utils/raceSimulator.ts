@@ -1,10 +1,16 @@
 import type { Horse, RaceResult, RaceProgress } from '@/types';
-import { ANIMATION_SPEED_FACTOR } from './constants';
+import {
+  ANIMATION_SPEED_FACTOR,
+  SPEED_VARIATION_MIN,
+  SPEED_VARIATION_RANGE,
+  MAX_PROGRESS_PERCENT,
+  ANIMATION_INTERVAL,
+} from './constants';
 
 export const calculateRaceSpeed = (horse: Horse): number => {
   const baseSpeed = horse.condition;
-  // Apply +%15 random variation - 0.85 to 1.15 range
-  const randomFactor = Math.random() * 0.3 + 0.85;
+  // Apply ±15% random variation (0.85 to 1.15 range)
+  const randomFactor = Math.random() * SPEED_VARIATION_RANGE + SPEED_VARIATION_MIN;
   return baseSpeed * randomFactor;
 }
 
@@ -37,9 +43,9 @@ export const simulateRace = (
       horses.forEach(horse => {
         if (!finished[horse.id]) {
           const progress = (speeds[horse.id] * currentTime) / (distance * ANIMATION_SPEED_FACTOR);
-          positions[horse.id] = Math.min(progress, 100);  // Max 100%
+          positions[horse.id] = Math.min(progress, MAX_PROGRESS_PERCENT);
 
-          if (positions[horse.id] >= 100) {
+          if (positions[horse.id] >= MAX_PROGRESS_PERCENT) {
             finished[horse.id] = true;
             finishTimes[horse.id] = currentTime;
             finishedCount++;
@@ -79,6 +85,6 @@ export const simulateRace = (
 
         resolve(result)
       }
-    }, 50);  // 20 FPS - balance between smooth animation and performance
+    }, ANIMATION_INTERVAL);
   })
 }

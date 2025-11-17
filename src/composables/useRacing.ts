@@ -2,6 +2,7 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import type { RootState } from '@/store';
 import { simulateRace } from '@/utils/raceSimulator';
+import { TOP_POSITIONS_COUNT, DELAY_BETWEEN_ROUNDS_MS } from '@/utils/constants';
 import { useRaceProgram } from './useRaceProgram';
 import { useCelebration } from './useCelebration';
 
@@ -48,7 +49,7 @@ export function useRacing() {
         if (isFinalRound) {
 
           const topThree = sortedPositions
-            .slice(0, 3)
+            .slice(0, TOP_POSITIONS_COUNT)
             .map(p => p.horse);
 
           await store.dispatch('racing/showCelebration', {
@@ -57,7 +58,7 @@ export function useRacing() {
             distance: result.distance,
             time: winner.time,
             isFinal: true,
-            topThree: topThree.length === 3 ? topThree : null,
+            topThree: topThree.length === TOP_POSITIONS_COUNT ? topThree : null,
           });
         } else {
           await store.dispatch('racing/showCelebration', {
@@ -74,7 +75,7 @@ export function useRacing() {
       }
 
       if (!isFinalRound) {
-        await new Promise(resolve => setTimeout(resolve, 750));
+        await new Promise(resolve => setTimeout(resolve, DELAY_BETWEEN_ROUNDS_MS));
       }
     }
   };
