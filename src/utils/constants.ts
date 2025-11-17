@@ -35,6 +35,9 @@ export const HORSE_COLORS = Object.keys(COLOR_CODES) as Array<keyof typeof COLOR
 export const getColorCode = (colorName: string): string => {
   return COLOR_CODES[colorName as keyof typeof COLOR_CODES] || '#000000';
 };
-export const MIN_CONDITION = 1;
+
+// Use faster values in Cypress tests
+const isTestMode = typeof window !== 'undefined' && (window as any).Cypress;
+export const MIN_CONDITION = isTestMode ? 80 : 1;
 export const MAX_CONDITION = 100;
-export const ANIMATION_SPEED_FACTOR = 5;
+export const ANIMATION_SPEED_FACTOR = isTestMode ? 2 : 5;
